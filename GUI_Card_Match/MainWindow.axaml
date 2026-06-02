@@ -1,9 +1,53 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="GUI_Card_Match.MainWindow"
-        Title="GUI_Card_Match">
-    Welcome to Avalonia!
+        Title="Card Matching Game"
+        Width="1000"
+        Height="1000"
+        Background="#1F1F22">
+
+    <Grid RowDefinitions="Auto,*,Auto" Margin="16">
+
+        <!-- Top status bar -->
+        <Grid Grid.Row="0" ColumnDefinitions="1.5*,1.5*,4*,1.5*,1.5*" ColumnSpacing="30" Margin="0,0,0,12">
+
+            <!-- Theme -->
+            <Viewbox Grid.Column="0" Stretch="Uniform" StretchDirection="DownOnly">
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock Text="Theme : " FontSize="20" FontWeight="SemiBold" FontFamily="Trebuchet MS" Foreground="#79f83f"/>
+                    <TextBlock x:Name="themeValue" Text="None" FontSize="20" FontWeight="SemiBold" FontFamily="Trebuchet MS" Foreground="#FFD93D"/>
+
+                </StackPanel>
+            </Viewbox>
+
+            <!-- Attempts -->
+            <Viewbox Grid.Column="1" Stretch="Uniform" StretchDirection="DownOnly">
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock Text="Attempts : " FontSize="20" FontWeight="SemiBold" FontFamily="Trebuchet MS" Foreground="#44B1F0"/>
+
+                    <TextBlock x:Name="attemptCount" Text="0" FontSize="20" FontWeight="SemiBold" FontFamily="Trebuchet MS" Foreground="#FFD93D"/>
+
+                </StackPanel>
+            </Viewbox>
+
+            <!-- Label -->
+            <Viewbox Grid.Column="2" Stretch="Uniform" StretchDirection="DownOnly">
+                <StackPanel>
+                    <TextBlock x:Name="GameStatus" Text="Match Cards!" FontSize="40" FontWeight="Bold" FontFamily="Trebuchet MS" Foreground="#f54646"/>
+                </StackPanel>
+            </Viewbox>
+
+            <Button Grid.Column="3" x:Name="AIplay" Content="AI" Padding="14,6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
+
+            <Button Grid.Column="4" x:Name="NewGameButton" Content="New Game" Padding="14,6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
+            
+            
+            
+
+        </Grid>
+
+    </Grid>
+
 </Window>
