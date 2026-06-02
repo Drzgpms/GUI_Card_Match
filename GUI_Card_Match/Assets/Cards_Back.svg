@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 426 500">
+
+    <!-- Outer white border -->
+    <rect x="0" y="0" width="426" height="500" rx="24" fill="#f4f4f4"></rect>
+
+    <!-- Blue border -->
+    <rect x="15" y="15" width="396" height="470" rx="18" fill="#17397f"></rect>
+
+    <!-- Inner white border -->
+    <rect x="25" y="25" width="376" height="450" rx="12" fill="none" stroke="#ffffff" stroke-width="4"></rect>
+
+    <!-- Pattern -->
+    <defs>
+
+        <pattern id="diamondPattern" width="70" height="70" patternUnits="userSpaceOnUse">
+
+            <line x1="0" y1="35" x2="35" y2="0" stroke="white" stroke-width="1.5"></line>
+
+            <line x1="35" y1="0" x2="70" y2="35" stroke="white" stroke-width="1.5"></line>
+
+            <line x1="70" y1="35" x2="35" y2="70" stroke="white" stroke-width="1.5"></line>
+
+            <line x1="35" y1="70" x2="0" y2="35" stroke="white" stroke-width="1.5"></line>
+
+            <circle cx="35" cy="35" r="4" fill="white"></circle>
+
+            <circle cx="0" cy="35" r="2" fill="white"></circle>
+
+            <circle cx="70" cy="35" r="2" fill="white"></circle>
+
+            <circle cx="35" cy="0" r="2" fill="white"></circle>
+
+            <circle cx="35" cy="70" r="2" fill="white"></circle>
+
+            <circle cx="17.5" cy="17.5" r="1.2" fill="white"></circle>
+
+            <circle cx="52.5" cy="17.5" r="1.2" fill="white"></circle>
+
+            <circle cx="17.5" cy="52.5" r="1.2" fill="white"></circle>
+
+            <circle cx="52.5" cy="52.5" r="1.2" fill="white"></circle>
+
+        </pattern>
+
+    </defs>
+
+    <!-- Pattern area -->
+    <rect x="30" y="30" width="366" height="440" fill="url(#diamondPattern)"></rect>
+
+</svg>

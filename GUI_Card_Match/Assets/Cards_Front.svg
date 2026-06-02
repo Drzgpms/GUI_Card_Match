@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 426 500">
+
+    <!-- Outer border -->
+    <rect x="0" y="0" width="426" height="500" rx="24" fill="#f4f4f4"></rect>
+
+    <!-- Inner card -->
+    <rect x="15" y="15" width="396" height="470" rx="18" fill="#ffffff"></rect>
+
+</svg>

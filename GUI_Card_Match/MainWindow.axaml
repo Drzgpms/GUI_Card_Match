@@ -5,49 +5,117 @@
         Width="1000"
         Height="1000"
         Background="#1F1F22">
+    <Window.Styles>
 
-    <Grid RowDefinitions="Auto,*,Auto" Margin="16">
+        <!-- EASY (GREEN) -->
+        <Style Selector="Button.easy">
+            <Setter Property="Background" Value="#2ecc71"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
 
-        <!-- Top status bar -->
-        <Grid Grid.Row="0" ColumnDefinitions="1.5*,1.5*,4*,1.5*,1.5*" ColumnSpacing="30" Margin="0,0,0,12">
+        <Style Selector="Button.easy:pointerover">
+            <Setter Property="Background" Value="#27ae60"/>
+        </Style>
 
-            <!-- Theme -->
-            <Viewbox Grid.Column="0" Stretch="Uniform" StretchDirection="DownOnly">
-                <StackPanel Orientation="Horizontal">
+        <!-- NORMAL (YELLOW) -->
+        <Style Selector="Button.normal">
+            <Setter Property="Background" Value="#f1c40f"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
 
-                    <TextBlock Text="Theme : " FontSize="20" FontWeight="SemiBold" FontFamily="Trebuchet MS" Foreground="#79f83f"/>
-                    <TextBlock x:Name="themeValue" Text="None" FontSize="20" FontWeight="SemiBold" FontFamily="Trebuchet MS" Foreground="#FFD93D"/>
+        <Style Selector="Button.normal:pointerover">
+            <Setter Property="Background" Value="#d4ac0d"/>
+        </Style>
 
-                </StackPanel>
+        <!-- HARD (RED) -->
+        <Style Selector="Button.hard">
+            <Setter Property="Background" Value="#e74c3c"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.hard:pointerover">
+            <Setter Property="Background" Value="#c0392b"/>
+        </Style>
+
+    </Window.Styles>
+
+    <Grid>
+
+        <!-- =========================
+             1. DIFFICULTY SCREEN
+        ========================== -->
+        <StackPanel x:Name="DifficultyPanel"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="20">
+            
+            <Viewbox Stretch="Uniform" StretchDirection="DownOnly">
+                
+                <TextBlock Text="Select a Difficulty!"
+                        FontSize="42"
+                        FontWeight="Bold"
+                        Foreground="#FFD93D"
+                        HorizontalAlignment="Center"/>
             </Viewbox>
 
-            <!-- Attempts -->
-            <Viewbox Grid.Column="1" Stretch="Uniform" StretchDirection="DownOnly">
-                <StackPanel Orientation="Horizontal">
+            <Button x:Name="EasyButton" Content="Easy" MaxWidth="200" Padding="10" Classes="easy" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
+            <Button x:Name="NormalButton" Content="Normal" MaxWidth="200" Padding="10" Classes="normal" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
+            <Button x:Name="HardButton" Content="Hard" MaxWidth="200" Padding="10" Classes="hard" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
 
-                    <TextBlock Text="Attempts : " FontSize="20" FontWeight="SemiBold" FontFamily="Trebuchet MS" Foreground="#44B1F0"/>
+        </StackPanel>
 
-                    <TextBlock x:Name="attemptCount" Text="0" FontSize="20" FontWeight="SemiBold" FontFamily="Trebuchet MS" Foreground="#FFD93D"/>
+        <!-- =========================
+             2. GAME UI
+        ========================== -->
+        <Grid x:Name="GamePanel"
+              RowDefinitions="Auto,*"
+              Margin="16"
+              IsVisible="False">
 
-                </StackPanel>
-            </Viewbox>
+            <!-- Top status bar -->
+            <Grid Grid.Row="0"
+                  ColumnDefinitions="1.5*,1.5*,4*,1.5*,1.5*"
+                  ColumnSpacing="30"
+                  Margin="0,0,0,12">
 
-            <!-- Label -->
-            <Viewbox Grid.Column="2" Stretch="Uniform" StretchDirection="DownOnly">
-                <StackPanel>
-                    <TextBlock x:Name="GameStatus" Text="Match Cards!" FontSize="40" FontWeight="Bold" FontFamily="Trebuchet MS" Foreground="#f54646"/>
-                </StackPanel>
-            </Viewbox>
+                <Viewbox Grid.Column="0" Stretch="Uniform" StretchDirection="DownOnly">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Theme : " FontSize="20" FontWeight="SemiBold" FontFamily="Trebuchet MS" Foreground="#79f83f"/>
+                        <TextBlock x:Name="themeValue" Text="None" FontSize="20" FontWeight="SemiBold" FontFamily="Trebuchet MS" Foreground="#FFD93D"/>
+                    </StackPanel>
+                </Viewbox>
 
-            <Button Grid.Column="3" x:Name="AIplay" Content="AI" Padding="14,6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                <Viewbox Grid.Column="1" Stretch="Uniform" StretchDirection="DownOnly">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Attempts : " FontSize="20" FontWeight="SemiBold" FontFamily="Trebuchet MS" Foreground="#44B1F0"/>
+                        <TextBlock x:Name="attemptCount" Text="0" FontSize="20" FontWeight="SemiBold" FontFamily="Trebuchet MS" Foreground="#FFD93D"/>
+                    </StackPanel>
+                </Viewbox>
 
-            <Button Grid.Column="4" x:Name="NewGameButton" Content="New Game" Padding="14,6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
-            
-            
-            
+                <Viewbox Grid.Column="2" Stretch="Uniform" StretchDirection="DownOnly">
+                    <TextBlock x:Name="GameStatus"
+                               Text="Match Cards!"
+                               FontSize="40"
+                               FontWeight="Bold"
+                               Foreground="#f54646"/>
+                </Viewbox>
+
+                <Button Grid.Column="3" x:Name="AIplay" Content="AI" Padding="14,6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                <Button Grid.Column="4" x:Name="NewGameButton" Content="New Game" Padding="14,6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
+
+            </Grid>
+
+            <Border Grid.Row="1"
+                Background="#101012"
+                CornerRadius="8"
+                Padding="10">
+
+                <Viewbox Stretch="Uniform">
+                    <UniformGrid x:Name="BoardGrid" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                </Viewbox>
+            </Border>
 
         </Grid>
 
     </Grid>
-
 </Window>
