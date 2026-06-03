@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="PersistenceTypes.fs" />
+    <Compile Include="Storage.fs" />
     <Compile Include="Types.fs" />
     <Compile Include="Utils.fs" />
     <Compile Include="Themes.fs" />

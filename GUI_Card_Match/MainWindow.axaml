@@ -5,6 +5,7 @@
         Width="1000"
         Height="1000"
         Background="#1F1F22">
+
     <Window.Styles>
 
         <!-- EASY (GREEN) -->
@@ -12,7 +13,6 @@
             <Setter Property="Background" Value="#2ecc71"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
-
         <Style Selector="Button.easy:pointerover">
             <Setter Property="Background" Value="#27ae60"/>
         </Style>
@@ -22,7 +22,6 @@
             <Setter Property="Background" Value="#f1c40f"/>
             <Setter Property="Foreground" Value="Black"/>
         </Style>
-
         <Style Selector="Button.normal:pointerover">
             <Setter Property="Background" Value="#d4ac0d"/>
         </Style>
@@ -32,47 +31,90 @@
             <Setter Property="Background" Value="#e74c3c"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
-
         <Style Selector="Button.hard:pointerover">
             <Setter Property="Background" Value="#c0392b"/>
+        </Style>
+
+        <!-- BLUE (Stats / Collection) -->
+        <Style Selector="Button.blue">
+            <Setter Property="Background" Value="#2980b9"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.blue:pointerover">
+            <Setter Property="Background" Value="#1a6fa0"/>
+        </Style>
+
+        <!-- DANGER (Reset) -->
+        <Style Selector="Button.danger">
+            <Setter Property="Background" Value="#c0392b"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.danger:pointerover">
+            <Setter Property="Background" Value="#a93226"/>
         </Style>
 
     </Window.Styles>
 
     <Grid>
 
-        <!-- =========================
+        <!-- =====================================================
              1. DIFFICULTY SCREEN
-        ========================== -->
-        <StackPanel x:Name="DifficultyPanel"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Spacing="20">
-            
-            <Viewbox Stretch="Uniform" StretchDirection="DownOnly">
-                
-                <TextBlock Text="Select a Difficulty!"
-                        FontSize="42"
-                        FontWeight="Bold"
-                        Foreground="#FFD93D"
-                        HorizontalAlignment="Center"/>
-            </Viewbox>
+        ====================================================== -->
+        <Grid x:Name="DifficultyPanel">
 
-            <Button x:Name="EasyButton" Content="Easy" MaxWidth="200" Padding="10" Classes="easy" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
-            <Button x:Name="NormalButton" Content="Normal" MaxWidth="200" Padding="10" Classes="normal" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
-            <Button x:Name="HardButton" Content="Hard" MaxWidth="200" Padding="10" Classes="hard" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
+            <!-- 중앙 버튼 -->
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Spacing="20">
 
-        </StackPanel>
+                <Viewbox Stretch="Uniform" StretchDirection="DownOnly">
+                    <TextBlock Text="Select a Difficulty!"
+                               FontSize="42"
+                               FontWeight="Bold"
+                               Foreground="#FFD93D"
+                               HorizontalAlignment="Center"/>
+                </Viewbox>
 
-        <!-- =========================
+                <Button x:Name="EasyButton"   Content="Easy"   MaxWidth="200" Padding="10" Classes="easy"   HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                <Button x:Name="NormalButton" Content="Normal" MaxWidth="200" Padding="10" Classes="normal" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                <Button x:Name="HardButton"   Content="Hard"   MaxWidth="200" Padding="10" Classes="hard"   HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
+
+            </StackPanel>
+
+            <!-- 왼쪽 아래: Collection 버튼 -->
+            <Button x:Name="CollectionButton"
+                    Content="🃏 Collection"
+                    Classes="blue"
+                    Width="160"
+                    Padding="12,8"
+                    FontWeight="Bold"
+                    FontSize="15"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Margin="24,0,0,24"/>
+
+            <!-- 오른쪽 아래: Stats 버튼 -->
+            <Button x:Name="StatsButton"
+                    Content="📊 Stats"
+                    Classes="blue"
+                    Width="160"
+                    Padding="12,8"
+                    FontWeight="Bold"
+                    FontSize="15"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,24,24"/>
+
+        </Grid>
+
+        <!-- =====================================================
              2. GAME UI
-        ========================== -->
+        ====================================================== -->
         <Grid x:Name="GamePanel"
               RowDefinitions="Auto,*"
               Margin="16"
               IsVisible="False">
 
-            <!-- Top status bar -->
             <Grid Grid.Row="0"
                   ColumnDefinitions="1.5*,1.5*,4*,1.5*,1.5*"
                   ColumnSpacing="30"
@@ -100,21 +142,140 @@
                                Foreground="#f54646"/>
                 </Viewbox>
 
-                <Button Grid.Column="3" x:Name="AIplay" Content="AI" Padding="14,6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                <Button Grid.Column="3" x:Name="AIplay"       Content="AI"       Padding="14,6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
                 <Button Grid.Column="4" x:Name="NewGameButton" Content="New Game" Padding="14,6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
 
             </Grid>
 
             <Border Grid.Row="1"
-                Background="#101012"
-                CornerRadius="8"
-                Padding="10">
-
+                    Background="#101012"
+                    CornerRadius="8"
+                    Padding="10">
                 <Viewbox Stretch="Uniform">
-                    <UniformGrid x:Name="BoardGrid" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                    <UniformGrid x:Name="BoardGrid" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Viewbox>
             </Border>
 
+        </Grid>
+
+        <!-- =====================================================
+             3. STATS PANEL (오버레이)
+        ====================================================== -->
+        <Grid x:Name="StatsPanel"
+              IsVisible="False"
+              Background="#CC000000">
+
+            <Border Background="#1F1F22"
+                    CornerRadius="12"
+                    Padding="28"
+                    MaxWidth="820"
+                    MaxHeight="820"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+                <Grid RowDefinitions="Auto,*,Auto">
+
+                    <!-- 제목 -->
+                    <TextBlock Grid.Row="0"
+                               Text="📊 Statistics"
+                               FontSize="30"
+                               FontWeight="Bold"
+                               Foreground="#FFD93D"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,16"/>
+
+                    <!-- 스크롤 내용 -->
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <StackPanel x:Name="StatsContent" Spacing="18"/>
+                    </ScrollViewer>
+
+                    <!-- 하단 버튼 -->
+                    <Grid Grid.Row="2"
+                          ColumnDefinitions="*,Auto,Auto"
+                          Margin="0,16,0,0">
+                        <Button Grid.Column="1"
+                                x:Name="StatsResetButton"
+                                Content="🗑 Reset Stats"
+                                Classes="danger"
+                                Padding="14,8"
+                                FontWeight="Bold"
+                                Margin="0,0,12,0"/>
+                        <Button Grid.Column="2"
+                                x:Name="StatsCloseButton"
+                                Content="Close"
+                                Classes="blue"
+                                Padding="14,8"
+                                FontWeight="Bold"/>
+                    </Grid>
+
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- =====================================================
+             4. COLLECTION PANEL (오버레이)
+        ====================================================== -->
+        <Grid x:Name="CollectionPanel"
+              IsVisible="False"
+              Background="#CC000000">
+
+            <Border Background="#1F1F22"
+                    CornerRadius="12"
+                    Padding="28"
+                    MaxWidth="900"
+                    MaxHeight="860"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+                <Grid RowDefinitions="Auto,Auto,*,Auto">
+
+                    <!-- 제목 -->
+                    <TextBlock Grid.Row="0"
+                               Text="🃏 Collection"
+                               FontSize="30"
+                               FontWeight="Bold"
+                               Foreground="#FFD93D"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,12"/>
+
+                    <!-- 테마 탭 바 -->
+                    <ScrollViewer Grid.Row="1"
+                                  HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Disabled"
+                                  Margin="0,0,0,12">
+                        <StackPanel x:Name="ThemeTabBar"
+                                    Orientation="Horizontal"
+                                    Spacing="8"/>
+                    </ScrollViewer>
+
+                    <!-- 카드 그리드 -->
+                    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                        <UniformGrid x:Name="CollectionGrid"
+                                     Columns="8"
+                                     HorizontalAlignment="Center"/>
+                    </ScrollViewer>
+
+                    <!-- 하단 버튼 -->
+                    <Grid Grid.Row="3"
+                          ColumnDefinitions="*,Auto,Auto"
+                          Margin="0,16,0,0">
+                        <Button Grid.Column="1"
+                                x:Name="CollectionResetButton"
+                                Content="🗑 Reset Collection"
+                                Classes="danger"
+                                Padding="14,8"
+                                FontWeight="Bold"
+                                Margin="0,0,12,0"/>
+                        <Button Grid.Column="2"
+                                x:Name="CollectionCloseButton"
+                                Content="Close"
+                                Classes="blue"
+                                Padding="14,8"
+                                FontWeight="Bold"/>
+                    </Grid>
+
+                </Grid>
+            </Border>
         </Grid>
 
     </Grid>
