@@ -12,6 +12,7 @@
     <Compile Include="Utils.fs" />
     <Compile Include="Themes.fs" />
     <Compile Include="Board.fs" />
+    <Compile Include="AI.fs" />
 
     <Compile Include="MainWindow.axaml.fs" />
     <Compile Include="App.axaml.fs" />
