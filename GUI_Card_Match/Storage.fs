@@ -3,28 +3,20 @@ module Storage
 open System
 open System.IO
 open System.Text.Json
-open System.Text.Json.Serialization
 open PersistenceTypes
 
-// ---------- 저장 경로 ----------
-// Windows: %APPDATA%\CardMatchGame\save.json
-// macOS/Linux: ~/.config/CardMatchGame/save.json
 let private saveDir =
     Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
         "CardMatchGame"
     )
 
-let private savePath =
-    Path.Combine(saveDir, "save.json")
+let private savePath = Path.Combine(saveDir, "save.json")
 
-// ---------- JSON 옵션 ----------
 let private jsonOptions =
     let o = JsonSerializerOptions()
     o.WriteIndented <- true
     o
-
-// ---------- 공개 API ----------
 
 let load () : SaveData =
     try
@@ -41,21 +33,36 @@ let save (data : SaveData) : unit =
         Directory.CreateDirectory(saveDir) |> ignore
         let json = JsonSerializer.Serialize(data, jsonOptions)
         File.WriteAllText(savePath, json)
-    with _ ->
-        ()   // 저장 실패해도 게임은 계속
+    with _ -> ()
 
+// 플레이 기록 추가 + 테마 발견 기록
 let addRecord (record : PlayRecord) (data : SaveData) : SaveData =
     let themes =
         if List.contains record.Theme data.DiscoveredThemes then
             data.DiscoveredThemes
         else
             data.DiscoveredThemes @ [record.Theme]
-
     { data with
         PlayHistory      = data.PlayHistory @ [record]
         DiscoveredThemes = themes }
 
-let reset () : SaveData =
-    let empty = SaveData.Empty
-    save empty
-    empty
+// 본 카드 누적 저장
+let addSeenCards (theme : string) (cardValues : string list) (data : SaveData) : SaveData =
+    let existing =
+        match data.SeenCardsByTheme.TryFind(theme) with
+        | Some lst -> lst
+        | None     -> []
+    let merged = (existing @ cardValues) |> List.distinct |> List.sort
+    { data with SeenCardsByTheme = data.SeenCardsByTheme.Add(theme, merged) }
+
+// 스탯만 리셋 (컬렉션 유지)
+let resetStats (data : SaveData) : SaveData =
+    let newData = { data with PlayHistory = [] }
+    save newData
+    newData
+
+// 컬렉션만 리셋 (스탯 유지)
+let resetCollection (data : SaveData) : SaveData =
+    let newData = { data with DiscoveredThemes = []; SeenCardsByTheme = Map.empty }
+    save newData
+    newData
